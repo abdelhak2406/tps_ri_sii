@@ -1,6 +1,4 @@
 """Exo2 serie 1 RI"""
-from os import terminal_size
-from posix import listdir
 from utilities import openPkl
 
 
@@ -17,8 +15,13 @@ def get_term(doc_number, inverse_file):
     return terme_freq
 
 
-def get_document(terme, inverse_file):
-    """Get the documents that have the term"""
+def get_documents(terme, inverse_file):
+    """Get the documents that have the term
+
+    Returns:
+        dict of this form :{"doc num_doc": number of occurences}, ex: {'doc 2': 1}
+    """
+
     term_freq={}
     for i in inverse_file:
         # (term, docum_num)
@@ -31,7 +34,7 @@ def get_document(terme, inverse_file):
 def main():
     inverse_file = openPkl("inverse_file.pkl","")
     res = get_term(1,inverse_file)
-    lis_doc = get_document("déguster",inverse_file)
+    lis_doc = get_documents("paris",inverse_file)
     print(lis_doc)
     #print(res)
 
