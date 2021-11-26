@@ -1,6 +1,9 @@
 """Fichier envoyé par la prof de tp."""
 
 # ouverture du fichier stopwords_fr
+from utilities import savePkl
+
+
 stopwordsfile = "files/stopwords_fr.txt"
 # Récupération de la liste des mots vides
 stopwords_list = open(stopwordsfile, "r", encoding="utf-8").read().splitlines()
@@ -71,6 +74,10 @@ def create_inverse_file(frequences):
         the inverse file format: {(term,doc_number):occurence}
     """
     inverse_file = {}
+    # import pdb; pdb.set_trace()
+
+    number_doc = len(frequences.keys())
+
     for i in frequences:
         for word in frequences[i]:
             #check if exists
@@ -80,11 +87,13 @@ def create_inverse_file(frequences):
                 print("there is a problem somewhere!")
     # TODO: optimiser !
     # ajouter les mot de frequence 0:
-    for doc in frequences:
-        for word in frequences[doc]:
-            if (word,i) not in inverse_file:
-                # sinon creer et mettre a 0
-                inverse_file[(word,i)] = 0
+    for i in frequences:
+        for word in frequences[i]:
+            for j in range(1,number_doc+1):
+                if (word,j) not in inverse_file:
+                    # sinon creer et mettre a 0
+                    inverse_file[(word,j)] = 0
+
             
 
     return inverse_file
@@ -96,7 +105,7 @@ def main():
     # save inverse file
     with open ("inversefile","w",encoding="utf-8") as file:
         file.write(str(inverse_file))
-    
+    savePkl(inverse_file,"inverse_file.pkl","") 
     print("\n\n Inverse File:\n\n")
     print(inverse_file)
 

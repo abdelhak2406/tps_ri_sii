@@ -1,2 +1,4 @@
 inversefile
 .vscode/
+__pycache__/
+*.pkl
