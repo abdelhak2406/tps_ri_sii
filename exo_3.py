@@ -1,8 +1,10 @@
 """Exo3"""
-
+# TODO:add new ddirectory to save outputed files
 from exo_2 import get_documents
-from utilities import openPkl
+from utilities import openPkl,savePkl
 from math import log10
+
+
 def get_all_terms(inverse_file):
     """Get all the terms of the inverse_file"""
     all_terms = set()
@@ -54,6 +56,11 @@ def main():
     a = max_freq(1,inverse_file)
     b = get_all_terms(inverse_file)
     dic_pond = create_dic_pond(inverse_file,3)
+
+    with open ("dic_ponder","w",encoding="utf-8") as file:
+        file.write(str(dic_pond))
+
+    savePkl(dic_pond,"dic_ponder.pkl","") 
     print(dic_pond)
 
 
